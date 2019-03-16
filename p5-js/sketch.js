@@ -1,16 +1,10 @@
 function setup() {
 	createCanvas(800, 800);
+	scale(1);
 
 	const start = [20, 20];
 
-	// 	var endPoints = drawBranch(start);
-	// 	var end = converge(endPoints[0], endPoints[1]);
-	// 	endPoints = drawBranch(end);
-	// 	endPoints = [drawPrint(endPoints[0]), drawPrint(endPoints[1])];
-	// 	end = converge(endPoints[0], endPoints[1]);
-
-	// var end = example1(start);
-	let end = example3(start);
+	let end = example4(start);
 
 	drawOpen(start);
 	drawOpen(end);
@@ -47,6 +41,34 @@ function example4(start) {
 	return points.end;
 }
 
+// loop nested in loop
+function example5(start, json) {
+	
+	let j = [{ 'type': 'while', 
+						 'body': {
+							 'type': 'if',
+							 'body': {
+								 'type': 'while',
+								 'body': {},
+							 }
+						 }
+					 },
+					 { 'type': 'while',
+						 'body': {}
+					 }];
+		
+	for (let obj in j) {
+		
+		if (j.type) {
+        }
+			
+	}
+	
+	// let points = drawWhile(start, ['while']);
+	// points = drawWhile(points.end, ['print']);
+	// return points.end;
+}
+
 function draw() {}
 
 // height of branch or while
@@ -69,6 +91,10 @@ function drawWhile(start, nodes) {
 	rect(x + 5, y + 20, 70, boxHeight, 10);
 
 	fill(0);
+	triangle(x + 50, y + 20, x + 33, y + 13, x + 33, y + 27);
+	triangle(x + 33, y + 20 + boxHeight, x + 50, y + 13 + boxHeight, x + 50, y + 27 + boxHeight);
+	
+	fill(0);
 	let xWhile, yWhile;
 	for (let i = nodes.length - 1; i >= 0; i--) {
 		xWhile = x + 75;
@@ -84,12 +110,12 @@ function drawWhile(start, nodes) {
 
 		if (nodes[i] == 'while') {
 			let endInner = drawWhile([xWhile + WHILE_HORIZONTAL_LINE, yWhile], ['print']);
-			connect(endInner.end, [xWhile, yWhile]);
+			curveBetween(endInner.end[0], endInner.end[1], xWhile, yWhile, 0.2, 0.15, 0.65);
 		}
 
 		if (nodes[i] == 'branch') {
 			let endInner = example1([xWhile + WHILE_HORIZONTAL_LINE, yWhile]);
-			connect(endInner, [xWhile, yWhile]);
+			curveBetween(endInner[0], endInner[1], xWhile, yWhile, 0.2, -0.15, 0.55);
 		}
 	}
 
@@ -159,4 +185,18 @@ function drawBranch(start) {
 	rect(x - LEN_BOX / 2, y + WIDTH_BRANCH / 2 - LEN_BOX / 2, LEN_BOX, LEN_BOX);
 
 	return [end1, end2];
+}
+
+
+function curveBetween(x1, y1, x2, y2, d, h, flip) {
+	//find two control points off this line
+	var original = p5.Vector.sub(createVector(x2, y2), createVector(x1, y1));
+	var inline = original.copy().normalize().mult(original.mag() * d);
+	var rotated = inline.copy().rotate(radians(90) + flip * radians(180)).normalize().mult(original.mag() * h);
+	var p1 = p5.Vector.add(p5.Vector.add(inline, rotated), createVector(x1, y1));
+	//line(x1, y1, p1.x, p1.y); //show control line
+	rotated.mult(-1);
+	var p2 = p5.Vector.add(p5.Vector.add(inline, rotated).mult(-1), createVector(x2, y2));
+	//line(x2, y2, p2.x, p2.y); //show control line
+	bezier(x1, y1, p1.x, p1.y, p2.x, p2.y, x2, y2);
 }
