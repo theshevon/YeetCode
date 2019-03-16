@@ -1,8 +1,15 @@
-function setup() {
-	createCanvas(800, 800);
-	scale(1);
+var a = document.currentScript.getAttribute('one'); //1
+var b = document.currentScript.getAttribute('two');
 
-	const start = [20, 20];
+alert(a);
+
+
+function setup() {
+
+	createCanvas(800, 800);
+	scale(1.5);
+
+	const start = [200, 200];
 
 	let end = example4(start);
 

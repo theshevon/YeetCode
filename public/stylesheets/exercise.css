@@ -212,3 +212,11 @@ form{
 #editor-head p{
     margin-bottom: 0;
 }
+
+#defaultCanvas0{
+    /* width: 50% !important; */
+    /* height: 87.75vh !important; */
+    position: absolute;
+    top: 5vh;
+    left: 45vw;
+}
