@@ -9,13 +9,14 @@ function setup() {
 			'body': [{
 				'type': 'branch',
 				'body': [{
-					'type': 'loop',
-					'body': []
-				},
-				{
-				'type': 'branch',
-				'body': []
-				}]
+						'type': 'loop',
+						'body': []
+					},
+					{
+						'type': 'branch',
+						'body': []
+					}
+				]
 			}]
 		},
 		{
@@ -24,7 +25,7 @@ function setup() {
 		}
 	];
 
-	let end = example5(start, json);
+	let end = example3(start, json);
 
 	// let end = example4(start);
 
@@ -53,7 +54,15 @@ function example2(start) {
 function example3(start) {
 	let points = drawWhile(start, [{
 		'type': 'branch',
-		body: []
+		body: [{
+				'type': 'print',
+				'body': []
+			},
+			{
+				'type': 'print',
+				'body': []
+			}
+		]
 	}], false);
 	return points.end;
 }
@@ -73,12 +82,15 @@ function example4(start) {
 // loop nested in loop
 function example5(start, j) {
 
-	let points = {'end': start, 'nodes': []};
+	let points = {
+		'end': start,
+		'nodes': []
+	};
 	for (let i = 0; i < j.length; i++) {
 		if (j[i].type == 'loop') {
 			points = drawWhile(points.end, j[i].body, false);
 		}
-		
+
 		// TODO: start with if
 	}
 
@@ -89,6 +101,8 @@ function drawBranch2(start, objs) {
 	let endpoints = drawBranch(start);
 	fill(0);
 	
+	let end = converge(endpoints[0], endpoints[1]);
+
 	// NOTE: Branch is contrained to only one IF and one ELSE, and no ELSIF's
 	// NOTE2: obj w/ i==0 is if, obj w/ i==1 is else
 	let x, y;
@@ -97,7 +111,7 @@ function drawBranch2(start, objs) {
 
 		if (objs[i].type == 'print') {
 			drawPrint([x, y]);
-		} 
+		}
 
 		if (objs[i].type == 'loop') {
 			let inner = drawWhile([x, y], objs[i].body, true);
@@ -110,22 +124,8 @@ function drawBranch2(start, objs) {
 		}
 	}
 
-	
-	
-	
-	
-	
-	
-	let end = converge(endpoints[0], endpoints[1]);
-	
-	
-	
-	
-	// drawPrint(endpoints[0]);
-	// drawPrint(endpoints[1]);
-	
 	fill(255);
-	
+
 	return end;
 }
 
