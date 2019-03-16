@@ -17,7 +17,7 @@ app.get("/", function(req, res){
 });
 
 app.get("/exercise/:id", function(req, res){
-    var question = "Write a while loop that prints out \"Hello World\" 5 times";
+    var question = "Write a while loop to find love in a hopeless place."
     res.render("exercise", { no: req.params.id, question: question })
 });
 
@@ -27,7 +27,11 @@ app.post("/exercise/:id", function(req, res){
     console.log(req.params.id);
     console.log(req.body.code);
     pp.save_script(req.body.code);
-    pp.run_script(console.log);
+    // if pp.run_script(console.log);
+    if (pp.verify_script(req.params.id)) {
+
+    }
+
 });
 
 app.listen(3000, function(){
