@@ -4,21 +4,19 @@ function setup() {
 
 	const start = [20, 20];
 
-	let json = 
-		[
-		{
+	let json = [{
 			'type': 'loop',
-			'body': [
-				{
+			'body': [{
 				'type': 'branch',
-				'body': [
-				{
+				'body': [{
 					'type': 'loop',
 					'body': []
-				}
-				]
-			}
-			]
+				},
+				{
+				'type': 'branch',
+				'body': []
+				}]
+			}]
 		},
 		{
 			'type': 'loop',
@@ -26,12 +24,12 @@ function setup() {
 		}
 	];
 
-// let end = example5(start, json);
+	let end = example5(start, json);
 
-let end = example4(start);
+	// let end = example4(start);
 
-drawOpen(start);
-drawOpen(end);
+	drawOpen(start);
+	drawOpen(end);
 }
 
 // branching example
@@ -54,7 +52,8 @@ function example2(start) {
 // branch in loop
 function example3(start) {
 	let points = drawWhile(start, [{
-		'type': 'branch'
+		'type': 'branch',
+		body: []
 	}], false);
 	return points.end;
 }
@@ -74,20 +73,60 @@ function example4(start) {
 // loop nested in loop
 function example5(start, j) {
 
-	// 	for (let obj in j) {
-	// 		let points;
-	// 		if (obj.type == 'loop') {
-	// 			points = drawWhile(start, obj, false);
-	// 		}
-
-	// 		// let points = drawWhile(start, ['while']);
-	// 		// points = drawWhile(points.end, ['print'], false);
-	// 		start = points.end;
-	// 	}
-
-	let points = drawWhile(start, j, false);
+	let points = {'end': start, 'nodes': []};
+	for (let i = 0; i < j.length; i++) {
+		if (j[i].type == 'loop') {
+			points = drawWhile(points.end, j[i].body, false);
+		}
+		
+		// TODO: start with if
+	}
 
 	return points.end;
+}
+
+function drawBranch2(start, objs) {
+	let endpoints = drawBranch(start);
+	fill(0);
+	
+	// NOTE: Branch is contrained to only one IF and one ELSE, and no ELSIF's
+	// NOTE2: obj w/ i==0 is if, obj w/ i==1 is else
+	let x, y;
+	for (let i = 0; i < objs.length; i++) {
+		x = endpoints[i][0], y = endpoints[i][1];
+
+		if (objs[i].type == 'print') {
+			drawPrint([x, y]);
+		} 
+
+		if (objs[i].type == 'loop') {
+			let inner = drawWhile([x, y], objs[i].body, true);
+			// curveBetween(inner.end[0], inner.end[1], xWhile, yWhile, 0.2, 0.15, 0.65);
+		}
+
+		if (objs[i].type == 'branch') {
+			let inner = drawBranch2([x, y], objs[i].body);
+			curveBetween(inner[0], inner[1], x, y, 0.2, -0.15, 0.55);
+		}
+	}
+
+	
+	
+	
+	
+	
+	
+	let end = converge(endpoints[0], endpoints[1]);
+	
+	
+	
+	
+	// drawPrint(endpoints[0]);
+	// drawPrint(endpoints[1]);
+	
+	fill(255);
+	
+	return end;
 }
 
 function draw() {}
@@ -135,7 +174,7 @@ function drawWhile(start, objs, inNestedLoop) {
 		}
 
 		if (objs[i].type == 'branch') {
-			let inner = example1([xWhile + WHILE_HORIZONTAL_LINE * (objs.length - i), yWhile]);
+			let inner = drawBranch2([xWhile + WHILE_HORIZONTAL_LINE * (objs.length - i), yWhile], objs[i].body);
 			curveBetween(inner[0], inner[1], xWhile, yWhile, 0.2, -0.15, 0.55);
 		}
 	}
