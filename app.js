@@ -24,17 +24,24 @@ app.get("/exercise/:id", function(req, res){
 app.post("/exercise/:id", function(req, res){
     // req.params.id is the question number (indexed from 0)
     // req.body.code is the user's code
-    console.log(req.params.id);
-    console.log(req.body.code);
+  
+    // verify that the script is syntactically correct
     pp.save_script(req.body.code);
-    // if pp.run_script(console.log);
     if (pp.verify_script(req.params.id)) {
-
         console.log("verified")
     }else{
         console.log(req.params.id)
         console.log("yeet")
     }
+
+    // verify that the logic is correct
+
+    // if so pass the JSON object as parameters for the renderer and refresh 
+    // with the users data
+
+
+    // consider adding 'clear all' button to delete all code that has currently
+    // been entered
 
 });
 
