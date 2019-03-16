@@ -3,6 +3,7 @@
 var bodyParser            = require("body-parser"),
     express               = require("express"),
     app                   = express();
+    pp                    = require("./routes/pythonprocessing")
 /*==================================app config================================*/
 
 app.set("view engine", "ejs");
@@ -25,9 +26,12 @@ app.post("/exercise/:id", function(req, res){
     // req.body.code is the user's code
     console.log(req.params.id);
     console.log(req.body.code);
+    pp.save_script(req.body.code);
+    pp.run_script(console.log);
+
+
 });
 
 app.listen(3000, function(){
     console.log("Successfully connected to server.");
 });
-
