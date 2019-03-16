@@ -27,9 +27,15 @@ app.post("/exercise/:id", function(req, res){
     console.log(req.params.id);
     console.log(req.body.code);
     pp.save_script(req.body.code);
-    if pp.run_script(console.log);
+    pp.run_script(console.log);
+    console.log("////////")
+    console.log(pp.verify_script(req.params.id))
     if (pp.verify_script(req.params.id)) {
 
+        console.log("verified")
+    }else{
+        console.log(req.params.id)
+        console.log("yeet")
     }
 
 });
