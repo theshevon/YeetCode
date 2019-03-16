@@ -1,0 +1,19 @@
+{
+  "name": "yeetcode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theshevon/YeetCode.git"
+  },
+  "author": "Daniel S, Karl F, Michael M, Shevon M",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/theshevon/YeetCode/issues"
+  },
+  "homepage": "https://github.com/theshevon/YeetCode#readme"
+}
