@@ -25,8 +25,8 @@ app.get("/", function(req, res){
 
 app.get("/exercise/:id", function(req, res){
     var q_no = req.params.id;
-    res.render("exercise", { 
-                                no: q_no, 
+    res.render("exercise", {
+                                no: q_no,
                                 question: questions[q_no],
                                 render: true
                             });
@@ -37,9 +37,10 @@ app.post("/exercise/:id", function(req, res){
     // req.body.code is the user's code
     var q_no = req.params.id;
     var code = req.body.code;
-  
+
     // verify that the script is syntactically correct
     pp.save_script(req.body.code);
+    pp.run_script(console.log);
     if (pp.verify_script(req.params.id)) {
         console.log("verified")
     }else{
@@ -49,7 +50,7 @@ app.post("/exercise/:id", function(req, res){
 
     // verify that the logic is correct
 
-    // if so pass the JSON object as parameters for the renderer and refresh 
+    // if so pass the JSON object as parameters for the renderer and refresh
     // with the users data
 
 
