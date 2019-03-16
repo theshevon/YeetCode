@@ -31,7 +31,7 @@ function setup() {
 
 	let end = example3(start, json);
 
-	// let end = example4(start);
+	// let end = example3(start);
 
 	drawOpen(start);
 	drawOpen(end);
@@ -171,6 +171,7 @@ function drawWhile(start, objs, inNestedLoop) {
 		} else {
 			line(xWhile, yWhile, xWhile + WHILE_HORIZONTAL_LINE * (objs.length - i), yWhile);
 			fill(0);
+			triangle(x + 133, y + 70.5, x + 116, y + 63.5, x + 116, y + 77.5);
 			circle(xWhile, yWhile, CIRCLE_RAD);
 		}
 
