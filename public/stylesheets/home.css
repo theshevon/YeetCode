@@ -1,0 +1,33 @@
+body{
+    background-color: black;
+    font-family: "FreeMono", monospace;
+    color: white;
+    text-align: center;
+}
+
+#content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#dec{
+    color: rgb(26, 156, 58);
+    opacity: 0.5;
+}
+
+#content h1{
+    font-size: 6rem;
+}
+
+button{
+    background-color:rgba(0, 0, 0, 0);
+    border-radius: 16px;
+    color: white;
+}
+
+.blink{
+    opacity: 0;
+}

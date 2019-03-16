@@ -1,0 +1,42 @@
+<% include ./partials/header-top %>
+
+<title>Yoot!</title>
+
+<% include ./partials/header-bottom %>
+
+<div id="header">
+    <a href="/">
+        YeetCode
+    </a>
+</div>
+<div id="exercise-info" class="py-3">
+    <% if (no > 0){ %>
+        <a href="/exercise/<%= parseInt(no)-1 %>">
+            <i class="fas fa-angle-left"></i>
+        </a>
+    <% }else{ %>
+        <i class="fas fa-angle-left" style="opacity:0; cursor: default;"></i>
+    <% } %>
+    <h3 class="px-3">Exercise <%= parseInt(no)+1 %></h3>
+    <% if (no < 4){ %>
+        <a href="/exercise/<%= parseInt(no)+1 %>">
+            <i class="fas fa-angle-right"></i>
+        </a>
+    <% }else{ %>
+        <i class="fas fa-angle-right" style="opacity:0; cursor: default"></i>
+    <% } %>
+</div>
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/stylesheets/exercise.css">
+
+<section id="content">
+    <div class="row">
+        <div id="code_edit" class="col-6"></div>
+        <div id="code_vis" class="col-6"></div>
+    </div>
+</section>
+
+<script src="/scripts/home.js"></script>
+
+<% include ./partials/footer %>
