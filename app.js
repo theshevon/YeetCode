@@ -16,8 +16,15 @@ app.get("/", function(req, res){
 });
 
 app.get("/exercise/:id", function(req, res){
-    var question = "Write a while loop to find love in a hopeless place"
+    var question = "Write a while loop to find love in a hopeless place."
     res.render("exercise", { no: req.params.id, question: question })
+});
+
+app.post("/exercise/:id", function(req, res){
+    // req.params.id is the question number (indexed from 0)
+    // req.body.code is the user's code
+    console.log(req.params.id);
+    console.log(req.body.code);
 });
 
 app.listen(3000, function(){

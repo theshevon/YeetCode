@@ -4,15 +4,8 @@ body{
 }
 
 .row, #code_edit, #code_vis{
-    height: 100%;
-}
-
-#code_edit{
-    border-right: 1px solid white;
-}
-
-#code_vis{
-    border-left: 1px solid white;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 #header{
@@ -21,8 +14,14 @@ body{
     font-size: 4rem;
     display: flex;
     justify-content: center;
-    background: white;
+    background: black;
     color: black;
+    text-transform: lowercase;
+}
+
+#code_vis{
+    background-color: white !important;
+    width: 100%;
 }
 
 #mainNavBar{
@@ -55,6 +54,13 @@ body{
     color: gray;
 }
 
+#exercise-details p{
+    color: rgb(3, 167, 126);
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 300;
+}
+
 #header a{
     color: black;
 }
@@ -65,8 +71,24 @@ body{
     text-decoration: none;
 }
 
-textarea{
+/* textarea{
+    font-size: 1.95rem;
     width: 100%;
+    resize: none;
+    border: 1px solid white;
+    background: rgba(0, 0, 0, 0);
+    border-radius: 8px;
+} */
+
+#editor {
+    /* position: relative; */
+    height: 500px;
+    width: 100%;
+}
+
+#header a{
+    background-color: teal;
+    color: white;
 }
 
 

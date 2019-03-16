@@ -6,10 +6,6 @@ body{
     background: gray;
 }
 
-::-webkit-scrollbar { 
-    display: none; 
-}
-
 #footer{
     text-align: center;
 }
