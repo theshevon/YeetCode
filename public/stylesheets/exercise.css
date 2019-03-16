@@ -3,10 +3,6 @@ body{
     color: white;
 }
 
-#content{
-    height: 100vh;
-}
-
 .row, #code_edit, #code_vis{
     height: 100%;
 }
@@ -69,7 +65,9 @@ body{
     text-decoration: none;
 }
 
-
+textarea{
+    width: 100%;
+}
 
 
 
