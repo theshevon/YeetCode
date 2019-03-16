@@ -1,15 +1,12 @@
 var a = document.currentScript.getAttribute('one'); //1
 var b = document.currentScript.getAttribute('two');
 
-alert(a);
-
-
 function setup() {
 
-	createCanvas(800, 800);
+	createCanvas(700, 600);
 	scale(1.5);
 
-	const start = [200, 200];
+	const start = [60, 80];
 
 	let end = example4(start);
 
