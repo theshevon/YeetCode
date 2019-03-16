@@ -101,7 +101,7 @@ body{
     height: 50%;
     width: 100%;
     font-size: 1rem;
-    border-right: 3px solid rgb(224, 224, 224);
+    border-right: 1.5px solid rgb(224, 224, 224);
     padding: 0 !important; 
 }
 
@@ -109,7 +109,7 @@ body{
     height: 50%;
     width: 100%;
     background-color: white;
-    border-right: 3px solid rgb(224, 224, 224);
+    border-right: 1.5px solid rgb(224, 224, 224);
     color: black;
     padding: 0 !important;
 }
@@ -159,21 +159,36 @@ form{
     color: white;
     padding: 0 !important;
     line-height: 2.5rem;
+    margin-right: 0 !important;
 }
 
 
 #editor-head{
     color: white;
-    line-height: 0.5rem !important;
+    line-height: 3rem !important;
+    margin-bottom: 0;
     background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
     width: 100%;
     text-align: center;
-    border-right: 3px solid rgb(224, 224, 224);
+    border-right: 1.5px solid rgb(224, 224, 224);
     padding: 0 !important; 
     font-size: 1.25rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 0 !important;
+}
+
+#code_vis.col-6{
+    margin-left: 0;
+}
+
+#editor-head button{
+    margin-right: 0 !important;
+}
+
+#ide{
+    margin-right: 0 !important;
 }
 
 #editor-head p{
@@ -184,10 +199,10 @@ form{
     font-size: 1.25rem;
     color: white;
     background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
-    line-height: 2.5rem;
+    line-height: 2.75rem;
     width: 100%;
     text-align: center;
-    border-left: 1.5px solid rgb(224, 224, 224);
+    border-left: 0px solid rgb(224, 224, 224);
 }
 
 #editor-head p{
@@ -216,7 +231,7 @@ form{
     color: rgb(181, 87, 221);
 }
 
-.fa-circle{
+.branch{
     color: #EE609C;
 }
 
