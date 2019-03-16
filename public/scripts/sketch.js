@@ -1,10 +1,37 @@
+var a = document.currentScript.getAttribute('one'); //1
+var b = document.currentScript.getAttribute('two');
+
 function setup() {
-	createCanvas(800, 800);
-	scale(1);
 
-	const start = [20, 20];
+	createCanvas(700, 600);
+	scale(1.5);
 
-	let end = example4(start);
+	const start = [60, 80];
+
+	let json = [{
+			'type': 'loop',
+			'body': [{
+				'type': 'branch',
+				'body': [{
+						'type': 'loop',
+						'body': []
+					},
+					{
+						'type': 'branch',
+						'body': []
+					}
+				]
+			}]
+		},
+		{
+			'type': 'loop',
+			'body': []
+		}
+	];
+
+	let end = example3(start, json);
+
+	// let end = example4(start);
 
 	drawOpen(start);
 	drawOpen(end);
@@ -21,52 +48,89 @@ function example1(start) {
 
 // while / loop example
 function example2(start) {
-	let points = drawWhile(start, ['print']);
+	let points = drawWhile(start, [{
+		'type': 'print'
+	}], false);
 	return points.end;
 }
 
 // branch in loop
 function example3(start) {
-	let points = drawWhile(start, ['branch']);
+	let points = drawWhile(start, [{
+		'type': 'branch',
+		body: [{
+				'type': 'print',
+				'body': []
+			},
+			{
+				'type': 'print',
+				'body': []
+			}
+		]
+	}], false);
 	return points.end;
 }
 
 // loop nested in loop
 function example4(start) {
-	// var endPoints = drawBranch(start);
-	// var end = converge(endPoints[0], endPoints[1]);
-	// drawPrint(endPoints[0]);
-	// drawPrint(endPoints[1]);
-	let points = drawWhile(start, ['while']);
+	let points = drawWhile(start, [{
+		'type': 'loop',
+		'body': []
+	}, {
+		'type': 'loop',
+		'body': []
+	}], false);
 	return points.end;
 }
 
 // loop nested in loop
-function example5(start, json) {
-	
-	let j = [{ 'type': 'while', 
-						 'body': {
-							 'type': 'if',
-							 'body': {
-								 'type': 'while',
-								 'body': {},
-							 }
-						 }
-					 },
-					 { 'type': 'while',
-						 'body': {}
-					 }];
-		
-	for (let obj in j) {
-		
-		if (j.type) {
-        }
-			
+function example5(start, j) {
+
+	let points = {
+		'end': start,
+		'nodes': []
+	};
+	for (let i = 0; i < j.length; i++) {
+		if (j[i].type == 'loop') {
+			points = drawWhile(points.end, j[i].body, false);
+		}
+
+		// TODO: start with if
 	}
+
+	return points.end;
+}
+
+function drawBranch2(start, objs) {
+	let endpoints = drawBranch(start);
+	fill(0);
 	
-	// let points = drawWhile(start, ['while']);
-	// points = drawWhile(points.end, ['print']);
-	// return points.end;
+	let end = converge(endpoints[0], endpoints[1]);
+
+	// NOTE: Branch is contrained to only one IF and one ELSE, and no ELSIF's
+	// NOTE2: obj w/ i==0 is if, obj w/ i==1 is else
+	let x, y;
+	for (let i = 0; i < objs.length; i++) {
+		x = endpoints[i][0], y = endpoints[i][1];
+
+		if (objs[i].type == 'print') {
+			drawPrint([x, y]);
+		}
+
+		if (objs[i].type == 'loop') {
+			let inner = drawWhile([x, y], objs[i].body, true);
+			// curveBetween(inner.end[0], inner.end[1], xWhile, yWhile, 0.2, 0.15, 0.65);
+		}
+
+		if (objs[i].type == 'branch') {
+			let inner = drawBranch2([x, y], objs[i].body);
+			curveBetween(inner[0], inner[1], x, y, 0.2, -0.15, 0.55);
+		}
+	}
+
+	fill(255);
+
+	return end;
 }
 
 function draw() {}
@@ -78,14 +142,14 @@ const HEIGHT_WHILE_INCREMENT = 40;
 const WIDTH_BRANCH = 160;
 const LEN_BOX = 20;
 const CIRCLE_RAD = 5;
-const WHILE_HORIZONTAL_LINE = 50;
+const WHILE_HORIZONTAL_LINE = 100;
 
-function drawWhile(start, nodes) {
+function drawWhile(start, objs, inNestedLoop) {
 	let x = start[0];
 	let y = start[1];
 
 	// base box height
-	let boxHeight = HEIGHT_WHILE_BASE + HEIGHT_WHILE_INCREMENT * nodes.length;
+	let boxHeight = HEIGHT_WHILE_BASE + HEIGHT_WHILE_INCREMENT * objs.length;
 
 	fill(255);
 	rect(x + 5, y + 20, 70, boxHeight, 10);
@@ -93,43 +157,46 @@ function drawWhile(start, nodes) {
 	fill(0);
 	triangle(x + 50, y + 20, x + 33, y + 13, x + 33, y + 27);
 	triangle(x + 33, y + 20 + boxHeight, x + 50, y + 13 + boxHeight, x + 50, y + 27 + boxHeight);
-	
+
 	fill(0);
 	let xWhile, yWhile;
-	for (let i = nodes.length - 1; i >= 0; i--) {
+	for (let i = objs.length - 1; i >= 0; i--) {
 		xWhile = x + 75;
 		yWhile = HEIGHT_WHILE_BASE + y + i * HEIGHT_WHILE_INCREMENT;
 
-		if (nodes[i] == 'print') {
+		if (objs[i].type == 'print') {
 			drawPrint([xWhile, yWhile]);
 		} else {
-			line(xWhile, yWhile, xWhile + WHILE_HORIZONTAL_LINE, yWhile);
+			line(xWhile, yWhile, xWhile + WHILE_HORIZONTAL_LINE * (objs.length - i), yWhile);
 			fill(0);
 			circle(xWhile, yWhile, CIRCLE_RAD);
 		}
 
-		if (nodes[i] == 'while') {
-			let endInner = drawWhile([xWhile + WHILE_HORIZONTAL_LINE, yWhile], ['print']);
-			curveBetween(endInner.end[0], endInner.end[1], xWhile, yWhile, 0.2, 0.15, 0.65);
+		if (objs[i].type == 'loop') {
+			let inner = drawWhile([xWhile + WHILE_HORIZONTAL_LINE * (objs.length - i), yWhile], objs[i].body, true);
+			// curveBetween(inner.end[0], inner.end[1], xWhile, yWhile, 0.2, 0.15, 0.65);
 		}
 
-		if (nodes[i] == 'branch') {
-			let endInner = example1([xWhile + WHILE_HORIZONTAL_LINE, yWhile]);
-			curveBetween(endInner[0], endInner[1], xWhile, yWhile, 0.2, -0.15, 0.55);
+		if (objs[i].type == 'branch') {
+			let inner = drawBranch2([xWhile + WHILE_HORIZONTAL_LINE * (objs.length - i), yWhile], objs[i].body);
+			curveBetween(inner[0], inner[1], xWhile, yWhile, 0.2, -0.15, 0.55);
 		}
 	}
 
 	fill(0);
-	// circle(x, y, CIRCLE_RAD);
 
-	line(x, y, x, y + boxHeight + HEIGHT_WHILE_INCREMENT);
+	if (inNestedLoop) {
+		line(x, y, x, y + boxHeight / 2 + HEIGHT_WHILE_INCREMENT);
+	} else {
+		line(x, y, x, y + 1.25 * boxHeight + HEIGHT_WHILE_INCREMENT);
+	}
 
 	fill(255);
 	rect(x - 10, y + 60, LEN_BOX, LEN_BOX);
 
 	return {
-		end: [x, y + boxHeight + HEIGHT_WHILE_INCREMENT],
-		nodes: []
+		end: [x, y + 1.25 * boxHeight + HEIGHT_WHILE_INCREMENT],
+		body: []
 	};
 }
 
@@ -198,5 +265,5 @@ function curveBetween(x1, y1, x2, y2, d, h, flip) {
 	rotated.mult(-1);
 	var p2 = p5.Vector.add(p5.Vector.add(inline, rotated).mult(-1), createVector(x2, y2));
 	//line(x2, y2, p2.x, p2.y); //show control line
-	bezier(x1, y1, p1.x, p1.y, p2.x, p2.y, x2, y2);
+	bezier(x1, y1, p1.x, p1.y, p2.x, p2.y, x2, y2)
 }

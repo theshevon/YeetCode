@@ -52,13 +52,15 @@ body{
 }
 
 #exercise-info h3{
-    background: -webkit-linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    background: -webkit-linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+    /* (120deg, #84fab0 0%, #8fd3f4 100%); */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .added-div{
-    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    /* background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%); */
+    background-image: linear-gradient(-120deg, #89f7fe 0%, #66a6ff 100%);
     padding: 3px;
 }
 
@@ -93,6 +95,8 @@ body{
     /* border-top: 1px solid black; */
     margin: 0;
     font-family: 'Poppins', sans-serif;
+    color: white !important;
+    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
 /********************************* CONTENT ************************************/
@@ -148,6 +152,7 @@ form{
     background-color: rgba(0, 0, 0, 0);
     border: none;
     color: white;
+    z-index: 100;
 }
 
 #submit-btn i{
@@ -177,7 +182,7 @@ form{
 #editor-head{
     color: white;
     line-height: 0.5rem !important;
-    background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+    background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
     /* border-top-left-radius: 6px; */
     /* border-top-right-radius: 6px; */
     width: 100%;
@@ -211,4 +216,48 @@ form{
 
 #editor-head p{
     margin-bottom: 0;
+}
+
+#defaultCanvas0{
+    /* width: 50% !important; */
+    /* height: 87.75vh !important; */
+    position: absolute;
+    top: 20vh;
+    left: 60vw;
+    z-index: 50;
+}
+
+#diamond{
+    transform: rotate(45deg);
+    color: rgb(242, 195, 252);
+}
+
+#legend{
+    font-size: 2rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+.fa-square{
+    color: rgb(181, 87, 221);
+}
+
+.fa-circle{
+    color: #EE609C;
+}
+
+#legend span{
+    font-size: 1rem;
+    font-weight: 200;
+}
+
+#legend div{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#legend{
+    position: relative;
+    top: 675px;
 }

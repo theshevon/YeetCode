@@ -1,3 +1,8 @@
-print('dfssf')
-for i in range(10):
-    x = 2
+answer = 10 
+
+if answer == 10: 
+    print("Correct")
+else: 
+    print("correct")
+
+
