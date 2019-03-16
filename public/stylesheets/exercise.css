@@ -146,7 +146,7 @@ form{
     margin-left: 280px;
 }
 
-#submit-btn:hover{
+#submit-btn i:hover{
     background-color: rgba(0, 0, 0, 0);
     color: rgb(226, 226, 226);
     cursor: pointer;
@@ -218,7 +218,7 @@ form{
 
 #diamond{
     transform: rotate(45deg);
-    color: rgb(242, 195, 252);
+    color: rgb(33, 145, 236);
 }
 
 #legend{

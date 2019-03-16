@@ -9,3 +9,7 @@ body{
 #footer{
     text-align: center;
 }
+
+button:focus{
+    outline: none;
+}
