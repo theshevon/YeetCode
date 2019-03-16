@@ -24,17 +24,19 @@ body{
 }
 
 button{
-    color: black;
-    background-color: white;
+    border-radius: 18px;
+    color: white;
+    background-color: black;
     font-size: 1.5rem;
     text-transform: lowercase;
     cursor: pointer;
+    font-family: 'Nunito', sans-serif;
 }
 
 button:hover{
-    background-color: teal;
-    color: white;
-    border: 1px solid teal;
+    background-color: white;
+    color: black;
+    border: 1px solid white;
 }
 
 .blink{
