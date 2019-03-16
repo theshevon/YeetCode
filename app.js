@@ -28,7 +28,9 @@ app.post("/exercise/:id", function(req, res){
     console.log(req.body.code);
     pp.save_script(req.body.code);
     pp.run_script(console.log);
-
+    if (pp.verify_script(req.params.id)) {
+        
+    }
 
 });
 

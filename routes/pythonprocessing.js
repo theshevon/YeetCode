@@ -1,6 +1,13 @@
 const {PythonShell} = require('python-shell')
 const fs = require('fs')
 const file_path = 'public/scripts/python/script.py';
+
+// stores regex tests for each challenge by index
+const regex_list = ["[\s\S]*if[ \(].*:[\s\S]*print[ (][\s\S]*else *:[\s\S]*",
+                    "[\s\S]*=[ (]*[0-9]{1,}[\s\S]*while[ (]{1,}[\s\S]{1,}:[\s\S]*print[ (]{1,}[\s\S]*",
+                    "[\s\S]*=[ (]*[0-9]{1,}[\s\S]*while[ (]{1,}[\s\S]{1,}:[\s\S]*if[ \(]*[ \S]*:[\s\S]{1,}print[ (]{1,}[\s\S]*else:[\s\S]{1,}print[ (]{1,}[\s\S]*"
+                    ];
+
 // save as a python script
 const save_script = (script) => fs.writeFileSync(file_path,script);
 
@@ -27,9 +34,15 @@ const run_script = (callback) => {
     })
 }
 
+const verify_script = (challenge_index) => {
+    const script = fs.readFileSync(file_path).toString();
+    const regex = new RegExp(regex_list[challenge_index]);
+    return script.match(regex);
+}
+
 module.exports = {
     save_script,
-    run_script
-    //
-    //verify_script,
+    run_script,
+    verify_script,
+    regex_list
 }
