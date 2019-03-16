@@ -31,7 +31,7 @@ function setup() {
 
 	let end = example3(start, json);
 
-	// let end = example4(start);
+	// let end = example3(start);
 
 	drawOpen(start);
 	drawOpen(end);
@@ -151,14 +151,16 @@ function drawWhile(start, objs, inNestedLoop) {
 	// base box height
 	let boxHeight = HEIGHT_WHILE_BASE + HEIGHT_WHILE_INCREMENT * objs.length;
 
+	stroke(181, 87, 221);
 	fill(255);
 	rect(x + 5, y + 20, 70, boxHeight, 10);
+	stroke(0, 0, 0);
 
 	fill(0);
 	triangle(x + 50, y + 20, x + 33, y + 13, x + 33, y + 27);
 	triangle(x + 33, y + 20 + boxHeight, x + 50, y + 13 + boxHeight, x + 50, y + 27 + boxHeight);
 
-	fill(0);
+	fill(255);
 	let xWhile, yWhile;
 	for (let i = objs.length - 1; i >= 0; i--) {
 		xWhile = x + 75;
@@ -169,6 +171,7 @@ function drawWhile(start, objs, inNestedLoop) {
 		} else {
 			line(xWhile, yWhile, xWhile + WHILE_HORIZONTAL_LINE * (objs.length - i), yWhile);
 			fill(0);
+			triangle(x + 133, y + 70.5, x + 116, y + 63.5, x + 116, y + 77.5);
 			circle(xWhile, yWhile, CIRCLE_RAD);
 		}
 
@@ -178,7 +181,9 @@ function drawWhile(start, objs, inNestedLoop) {
 		}
 
 		if (objs[i].type == 'branch') {
+			fill(255);
 			let inner = drawBranch2([xWhile + WHILE_HORIZONTAL_LINE * (objs.length - i), yWhile], objs[i].body);
+			fill(255);
 			curveBetween(inner[0], inner[1], xWhile, yWhile, 0.2, -0.15, 0.55);
 		}
 	}
@@ -191,8 +196,10 @@ function drawWhile(start, objs, inNestedLoop) {
 		line(x, y, x, y + 1.25 * boxHeight + HEIGHT_WHILE_INCREMENT);
 	}
 
+	stroke(181, 87, 221);
 	fill(255);
 	rect(x - 10, y + 60, LEN_BOX, LEN_BOX);
+	stroke(0, 0, 0);
 
 	return {
 		end: [x, y + 1.25 * boxHeight + HEIGHT_WHILE_INCREMENT],
@@ -205,8 +212,9 @@ function drawPrint(p) {
 	let y = p[1];
 
 	fill(255);
-	// line(p[0], p[1], x, y + HEIGHT_PRINT);
+	stroke(33, 145, 236);
 	quad(x, y - LEN_BOX / 2, x + LEN_BOX / 2, y, x, y + LEN_BOX / 2, x - LEN_BOX / 2, y);
+	stroke(0, 0, 0);
 
 	return [x, y];
 }
@@ -249,7 +257,9 @@ function drawBranch(start) {
 	line(x, y + HEIGHT / 2, x + WIDTH_BRANCH / 2, y + HEIGHT / 2);
 
 	fill(255);
+	stroke('#EE609C');
 	rect(x - LEN_BOX / 2, y + WIDTH_BRANCH / 2 - LEN_BOX / 2, LEN_BOX, LEN_BOX);
+	stroke(0, 0, 0);
 
 	return [end1, end2];
 }
