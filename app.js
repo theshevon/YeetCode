@@ -3,7 +3,11 @@
 var bodyParser            = require("body-parser"),
     express               = require("express"),
     app                   = express();
+<<<<<<< HEAD
+    pp                    = require("./routes/pythonprocessing");
+=======
     pp                    = require("./routes/pythonprocessing")
+>>>>>>> aa68b88eb25da9132eb7bbb588ff8229c76bf915
 /*==================================app config================================*/
 
 app.set("view engine", "ejs");
@@ -17,7 +21,7 @@ app.get("/", function(req, res){
 });
 
 app.get("/exercise/:id", function(req, res){
-    var question = "Write a while loop to find love in a hopeless place."
+    var question = "Write a while loop that prints out \"Hello World\" 5 times";
     res.render("exercise", { no: req.params.id, question: question })
 });
 

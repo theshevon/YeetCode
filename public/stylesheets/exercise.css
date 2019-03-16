@@ -1,95 +1,214 @@
 body{
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
+    font-family: 'Nunito', sans-serif;
 }
 
-.row, #code_edit, #code_vis{
-    padding-left: 20px;
-    padding-right: 20px;
-}
+/********************************* HEADER *************************************/
 
 #header{
     font-family: "FreeMono", monospace;
     text-align: center;
-    font-size: 4rem;
+    font-size: 1.75rem;
     display: flex;
     justify-content: center;
-    background: black;
-    color: black;
+    background: rgba(0, 0, 0, 0);
     text-transform: lowercase;
+    position: absolute;
+    top: 1px;
+    left: 10px;
 }
 
-#code_vis{
-    background-color: white !important;
-    width: 100%;
+#header a{
+    color: white;
 }
 
-#mainNavBar{
-    margin-top: 5rem;
+#header a:hover{
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/********************************* EX INFO ************************************/
+
+#exercise{
+    font-size: 1.9rem;
+    /* color: rgb(3, 167, 126); */
+    font-weight: 100;
+    margin-bottom: 0 !important;
+    cursor: default;
+    padding-top: 2px;
 }
 
 #exercise-info{
     display: flex;
     justify-content: center;
     text-align: center;
+    color: white;
+    margin: 0;
+    background: white;
+    width: 15% !important;
+    border-radius: 18px;
 }
 
 #exercise-info h3{
-    font-weight: 100;
-    margin-bottom: 0 !important;
-    font-size: 2rem;
-    cursor: default;
+    background: -webkit-linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.added-div{
+    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    padding: 3px;
 }
 
 #exercise-info i{
-    font-size: 2.5rem;
+    margin-top: 5px;
+    font-size: 2rem;
     cursor: pointer;
 }
 
 #exercise-info a{
-    color: white;
+    color: rgb(226, 226, 226);
 }
 
 #exercise-info a:hover i{
-    color: gray;
+    background: -webkit-linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 #exercise-details p{
-    color: rgb(3, 167, 126);
+    color: black;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 300;
 }
 
-#header a{
-    color: black;
+#exercise-details{
+    /* border-bottom: 1px solid black; */
 }
 
-#header a:hover{
-    color: black;
-    cursor: pointer;
-    text-decoration: none;
+#q{
+    /* border-top: 1px solid black; */
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
 }
 
-/* textarea{
-    font-size: 1.95rem;
+/********************************* CONTENT ************************************/
+
+.row{
+    height: 80vh;
+}
+
+#editor{
+    height: 50%;
     width: 100%;
-    resize: none;
-    border: 1px solid white;
-    background: rgba(0, 0, 0, 0);
-    border-radius: 8px;
-} */
-
-#editor {
-    /* position: relative; */
-    height: 500px;
-    width: 100%;
+    /* border-bottom-right-radius: 6px; */
+    /* border-bottom-left-radius: 6px; */
+    font-size: 1rem;
+    border-right: 3px solid rgb(224, 224, 224);
+    padding: 0 !important; 
 }
 
-#header a{
-    background-color: teal;
+#terminal{
+    height: 50%;
+    width: 100%;
+    /* border-radius: 6px; */
+    background-color: white;
+    border-right: 3px solid rgb(224, 224, 224);
+    color: black;
+    /* font-family: "FreeMono", monospace; */
+    padding: 0 !important;
+}
+
+form{
+    height: 5vh;
+}
+
+#ide{
+    padding: 0;
+}
+
+#code_vis{
+    font-size: 1rem;
+    height: 87.75vh;
+    width: 100%;
+    /* border-radius: 6px; */
+    padding: 0;
+    border-left: 3px solid rgb(224, 224, 224);
+}
+ 
+#submit-btn{
+    /* font-family: "FreeMono", monospace; */
+    font-size: 1.5rem;
+    line-height: 1.4rem;
+    /* border-radius: 6px; */
+    margin-top: 10px;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
     color: white;
 }
 
+#submit-btn i{
+    font-size: 1.25rem;
+    padding: 0;
+    margin-left: 280px;
+}
+
+#submit-btn:hover{
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(226, 226, 226);
+    cursor: pointer;
+}
+
+#terminal-head{
+    font-size: 1.25rem;
+    background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+    text-align: center;
+    color: white;
+    /* border-top-left-radius: 4px; */
+    /* border-top-right-radius: 4px; */
+    padding: 0 !important;
+    line-height: 2.5rem;
+}
 
 
+#editor-head{
+    color: white;
+    line-height: 0.5rem !important;
+    background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+    /* border-top-left-radius: 6px; */
+    /* border-top-right-radius: 6px; */
+    width: 100%;
+    text-align: center;
+    /* font-family: 'FreeMono', monospace; */
+    border-right: 3px solid rgb(224, 224, 224);
+    padding: 0 !important; 
+    font-size: 1.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#editor-head p{
+    margin-left: 340px;
+}
+
+#vis-head{
+    font-size: 1.25rem;
+    color: white;
+    background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
+    /* border-top-left-radius: 6px; */
+    /* border-top-right-radius: 6px; */
+    line-height: 2.5rem;
+    width: 100%;
+    text-align: center;
+    /* font-family: 'FreeMono', monospace; */
+    border-left: 1.5px solid rgb(224, 224, 224);
+}
+
+
+#editor-head p{
+    margin-bottom: 0;
+}

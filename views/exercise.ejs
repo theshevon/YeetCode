@@ -3,6 +3,7 @@
 <script src="//ajaxorg.github.io/ace-builds/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 
 <title>Yoot!</title>
+<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
 
 <% include ./partials/header-bottom %>
 
@@ -11,48 +12,66 @@
 
 <div id="header">
     <a href="/">
-        YeetCode
+        YeetCode.
     </a>
 </div>
-<div id="exercise-details" class="pt-3">
-    <div id="exercise-info">
-        <% if (no > 0){ %>
-            <a href="/exercise/<%= parseInt(no)-1 %>">
-                <i class="fas fa-angle-left"></i>
-            </a>
-        <% }else{ %>
-            <i class="fas fa-angle-left" style="opacity:0; cursor: default;"></i>
-        <% } %>
-        <h3 class="px-3">Exercise <%= parseInt(no)+1 %></h3>
-        <% if (no < 4){ %>
-            <a href="/exercise/<%= parseInt(no)+1 %>">
-                <i class="fas fa-angle-right"></i>
-            </a>
-        <% }else{ %>
-            <i class="fas fa-angle-right" style="opacity:0; cursor: default"></i>
-        <% } %>
+
+<!-- Details about the exercise -->
+<div id="exercise-details">
+    <div class="added-div d-flex justify-content-center">
+        <div id="exercise-info">
+            <% if (no > 0){ %>
+                <a href="/exercise/<%= parseInt(no)-1 %>">
+                    <i class="fas fa-angle-left"></i>
+                </a>
+            <% }else{ %>
+                <i class="fas fa-angle-left" style="opacity:0; cursor: default;"></i>
+            <% } %>
+            <h3 id="exercise" class="px-3">Exercise <%= parseInt(no)+1 %></h3>
+            <% if (no < 4){ %>
+                <a href="/exercise/<%= parseInt(no)+1 %>">
+                    <i class="fas fa-angle-right"></i>
+                </a>
+            <% }else{ %>
+                <i class="fas fa-angle-right" style="opacity:0; cursor: default"></i>
+            <% } %>
+        </div>
     </div>
-    <p class="mt-2"><%= question %></p>
+    <p id="q" class="py-3"><%= question %></p>
 </div>
 
+<!-- Editor and code visualiser -->
 <section id="content">
     <div class="row">
-        <div class="col-6">
+        <div id="ide" class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center">
+            <div id="editor-head">
+                <p>my_program.py</p>
+                <form method="POST" action="/exercise/<%= no %>">
+                    <textarea name="code" style="display:none"></textarea>
+                    <button id="submit-btn" class="flex-end"><i class="fas fa-play"></i></button>
+                </form>
+            </div>
             <div id="editor"></div>
-            <form method="POST" action="/exercise/<%= no %>">
-                <textarea name="code" style="visibility: hidden"></textarea>
-                <button id="submit-btn">Run Code</button>
-            </form>
+            <div id="terminal">
+                <div id="terminal-head">
+                    <p>terminal</p>
+                </div>
+            </div>
         </div>
-        <div id="code_vis" class="col-6"></div>
+        <div id="code_vis" class="col-12 col-md-6">
+            <div id="vis-head">
+                <p>visualiser</p>
+            </div>
+        </div>
     </div>
 </section>
 
 <script>
     var editor = ace.edit("editor");
     editor.getSession().setUseWorker(false);
-    editor.setTheme("ace/theme/dracula");
+    editor.setTheme("ace/theme/xcode");
     editor.getSession().setMode("ace/mode/python");
+    editor.setShowPrintMargin(false);
 
     $("#submit-btn").on("click", function(){
         var text = editor.getValue();
