@@ -15,6 +15,11 @@ app.get("/", function(req, res){
     res.render("home");
 });
 
+app.get("/exercise/:id", function(req, res){
+    var question = "Write a while loop to find love in a hopeless place"
+    res.render("exercise", { no: req.params.id, question: question })
+});
+
 app.listen(3000, function(){
     console.log("Successfully connected to server.");
 });

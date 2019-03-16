@@ -1,0 +1,15 @@
+body{
+    overflow-x: hidden !important;
+}
+
+#mainNavBar{
+    background: gray;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+#footer{
+    text-align: center;
+}

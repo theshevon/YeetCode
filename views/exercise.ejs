@@ -1,0 +1,59 @@
+<% include ./partials/header-top %>
+
+<title>Yoot!</title>
+
+<script src="monaco-editor/min/vs/loader.js"></script>
+
+<% include ./partials/header-bottom %>
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/stylesheets/exercise.css">
+
+<div id="header">
+    <a href="/">
+        YeetCode
+    </a>
+</div>
+<div id="exercise-info" class="pt-3">
+    <% if (no > 0){ %>
+        <a href="/exercise/<%= parseInt(no)-1 %>">
+            <i class="fas fa-angle-left"></i>
+        </a>
+    <% }else{ %>
+        <i class="fas fa-angle-left" style="opacity:0; cursor: default;"></i>
+    <% } %>
+    <h3 class="px-3">Exercise <%= parseInt(no)+1 %></h3>
+    <% if (no < 4){ %>
+        <a href="/exercise/<%= parseInt(no)+1 %>">
+            <i class="fas fa-angle-right"></i>
+        </a>
+    <% }else{ %>
+        <i class="fas fa-angle-right" style="opacity:0; cursor: default"></i>
+    <% } %>
+</div>
+
+<section id="content">
+    <div class="row">
+        <div id="code_edit" class="col-6">
+            <textarea class="codemirror-textarea"></textarea>
+            <!-- <form action="/exercise">
+                <textarea name="" id="" cols="30" rows="58"></textarea>
+            </form> -->
+        </div>
+        <div id="code_vis" class="col-6"></div>
+    </div>
+</section>
+
+<script>
+  $(document).ready(function(){
+	//code here...
+	var code = $(".codemirror-textarea")[0];
+	var editor = CodeMirror.fromTextArea(code, {
+		lineNumbers : true
+	});
+});
+</script>
+
+<script src="/scripts/exercise.js"></script>
+
+<% include ./partials/footer %>

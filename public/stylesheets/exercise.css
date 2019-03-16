@@ -1,0 +1,73 @@
+body{
+    background-color: black;
+    color: white;
+}
+
+.row, #code_edit, #code_vis{
+    height: 100%;
+}
+
+#code_edit{
+    border-right: 1px solid white;
+}
+
+#code_vis{
+    border-left: 1px solid white;
+}
+
+#header{
+    font-family: "FreeMono", monospace;
+    text-align: center;
+    font-size: 4rem;
+    display: flex;
+    justify-content: center;
+    background: white;
+    color: black;
+}
+
+#mainNavBar{
+    margin-top: 5rem;
+}
+
+#exercise-info{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+#exercise-info h3{
+    font-weight: 100;
+    margin-bottom: 0 !important;
+    font-size: 2rem;
+    cursor: default;
+}
+
+#exercise-info i{
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+#exercise-info a{
+    color: white;
+}
+
+#exercise-info a:hover i{
+    color: gray;
+}
+
+#header a{
+    color: black;
+}
+
+#header a:hover{
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+textarea{
+    width: 100%;
+}
+
+
+
