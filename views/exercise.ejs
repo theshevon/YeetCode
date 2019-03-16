@@ -3,7 +3,7 @@
 <script src="//ajaxorg.github.io/ace-builds/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <script src="/scripts/sketch.js" one="1" two="2"></script>
 
-<title>Yoot!</title>
+<title>yeet</title>
 <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
 
 <% include ./partials/header-bottom %>
@@ -55,8 +55,11 @@
             <div id="editor"></div>
             <div id="terminal">
                 <div id="terminal-head">
-                    <p>output</p>
+                    <p>terminal</p>
                 </div>
+                <% if (msg !== "") { %>
+                    <p><%= msg %></p>
+                <% } %>
             </div>
         </div>
         <div id="code_vis" class="col-6">

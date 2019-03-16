@@ -21,26 +21,29 @@ const run_script = (callback) => {
 
         // get the ast and convert to a json object -- accessible via
         // callback
-        const obj = ast_json(console.log)
+        const obj = ast_json((obj) => {
+            callback(undefined,obj,undefined);
+        });
 
-        return
 
         // run the script
-        const pyshell = new PythonShell(file_path+'script.py')
+        const pyshell = new PythonShell(file_path+'script.py');
 
 
         // run the script and return the output as an object
-        pyshell.on('message', (message)=>callback(message))
+        pyshell.on('message', (message)=>callback(message,undefined,undefined));
 
         pyshell.end((err,code,sig) => {
             if(err){
-                callback(err)
+                callback(undefined,undefined,err)
             }
-        })
+        });
 
+        return true;
+        
     }, (err) => {
         // if there is an error, we need to do something
-        callback(err);
+        callback(err,undefined,undefined);
     })
 }
 
@@ -55,16 +58,17 @@ const ast_json = (callback) => {
 
     pyshell.on('message',(data)=>{
         // then we want to aggregate the entire message
-        //console.log(data)
+        console.log(data)
         message+=data
     })
-
+    
     // when we have reached the end of the message, we can then convert
     // to json
     pyshell.end((err,code,sig) => {
         if(err){
             callback(err)
         }
+        console.log(message)
         json_ast = JSON.parse(message);
 
         callback(json_ast.body)
