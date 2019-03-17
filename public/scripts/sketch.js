@@ -8,30 +8,7 @@ function setup() {
 
 	const start = [60, 80];
 
-	let json = [{
-			'type': 'loop',
-			'body': [{
-				'type': 'branch',
-				'body': [{
-						'type': 'loop',
-						'body': []
-					},
-					{
-						'type': 'branch',
-						'body': []
-					}
-				]
-			}]
-		},
-		{
-			'type': 'loop',
-			'body': []
-		}
-	];
-
-	let end = example3(start, json);
-
-	// let end = example3(start);
+	let end = example3(start);
 
 	drawOpen(start);
 	drawOpen(end);
