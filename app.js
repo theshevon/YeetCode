@@ -13,11 +13,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 /*====================================routing=================================*/
 
-var questions = ["Write a while loop to print \"Hello\" 5 times",
-                 "",
-                 "",
-                 "",
-                 ""];
+var questions = ["Write a function that outputs 10 when 'answer' is correct; incorrect otherwise",
+                 "Write a function that a draws a right angles triangle using asterisks with a base length of 10",
+                 "Write a function that loops 10 times and prints '<' if the iterator is divisible by 2, '>' otherwise",
+                 "Write a function that loops 5 times and prints the each iterator n times"];
 
 app.get("/", function(req, res){
     res.render("home");
@@ -28,8 +27,9 @@ app.get("/exercise/:id", function(req, res){
     res.render("exercise", {
                                 no: q_no,
                                 question: questions[q_no],
-                                render_anim: false,
-                                msg: ""
+                                renderAnim: false,
+                                msg: "",
+                                code: ""
                             });
 });
 
@@ -42,37 +42,27 @@ app.post("/exercise/:id", function(req, res){
     pp.save_script(code);
 
      // verify that the script is syntactically and logically correct
-    if (pp.run_script((msg,ast_obj,err) =>{
+    // if (pp.run_script((msg,ast_obj,err) =>{
 
-        if (err){
-            console.log("Error 01");
+        // if (err){
+        //     console.log("Error");
+        //     res.render("exercise", {
+        //         no: q_no,
+        //         question: questions[q_no],
+        //         render_anim: false,
+        //         msg: err
+        //     });
+        // }else{
+
             res.render("exercise", {
                 no: q_no,
                 question: questions[q_no],
-                render_anim: false,
-                msg: err
+                renderAnim: true,
+                msg: "success!",
+                code: code
             });
-        }else{
-            if (pp.verify_sem_script(q_no)){
-                console.log("working");
-                res.render("exercise", {
-                    no: q_no,
-                    question: questions[q_no],
-                    render_anim: true,
-                    msg: msg
-                });
-            }else{
-                console.log("Error 02");
-                console.log(q_no, questions[q_no]);
-                res.render("exercise", {
-                    no: q_no,
-                    question: questions[q_no],
-                    render_anim: false,
-                    msg: "Sorry, try again!"
-                });
-            }
-        }
-    }));
+    //     }
+    // }));
 });
 
 app.listen(3000, function(){

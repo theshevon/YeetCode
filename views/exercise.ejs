@@ -1,7 +1,6 @@
 <% include ./partials/header-top %>
 
 <script src="//ajaxorg.github.io/ace-builds/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-<script src="/scripts/sketch.js" one="1" two="2"></script>
 
 <title>yeet</title>
 <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
@@ -11,9 +10,11 @@
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/stylesheets/exercise.css">
 
+<script src="/scripts/sketch.js" q_num="<%= no %>" renderAnim="<%= renderAnim %>"></script>
+
 <div id="header">
     <a href="/">
-        YeetCode
+        YeetCode <%= renderAnim %>
     </a>
 </div>
 
@@ -29,7 +30,8 @@
                 <i class="fas fa-angle-left" style="opacity:0; cursor: default;"></i>
             <% } %>
             <h3 id="exercise" class="px-3">Exercise <%= parseInt(no)+1 %></h3>
-            <% if (no < 4){ %>
+            <!-- 3 questions -->
+            <% if (no < 3){ %>
                 <a href="/exercise/<%= parseInt(no)+1 %>">
                     <i class="fas fa-angle-right"></i>
                 </a>
@@ -47,18 +49,22 @@
         <div id="ide" class="col-6 d-flex flex-column justify-content-center align-items-center">
             <div id="editor-head">
                 <p>my_program.py</p>
-                <form method="POST" action="/exercise/<%= no %>">
+                <form method="POST" action="/exercise/<%= no %>">                    
                     <textarea name="code" style="display:none"></textarea>
                     <button id="submit-btn" class="flex-end"><i class="fas fa-play"></i></button>
                 </form>
             </div>
+            <% if (code !== "") { %>
+            <div id="editor"><%= code %></div>
+            <% } else { %>
             <div id="editor"></div>
+            <% } %>
             <div id="terminal">
                 <div id="terminal-head">
                     <p>terminal</p>
                 </div>
                 <% if (msg !== "") { %>
-                    <p><%= msg %></p>
+                    <p class="pl-5"><%= msg %></p>
                 <% } %>
             </div>
         </div>

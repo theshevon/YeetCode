@@ -19,6 +19,8 @@ const run_script = (callback) => {
     // check the syntax, if there is no error, then we can proceed to run the code
     syntax_check.then( (result)=>{
 
+        return true;
+
         // get the ast and convert to a json object -- accessible via
         // callback
         const obj = ast_json((obj) => {
@@ -39,7 +41,6 @@ const run_script = (callback) => {
             }
         });
 
-        return true;
         
     }, (err) => {
         // if there is an error, we need to do something

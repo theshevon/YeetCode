@@ -1,15 +1,31 @@
-var a = document.currentScript.getAttribute('one'); //1
-var b = document.currentScript.getAttribute('two');
+var number = document.currentScript.getAttribute('q_num'); 
+var render_anim = document.currentScript.getAttribute('renderAnim');
 
 function setup() {
 
+	console.log(number);
+	console.log(render_anim);
 	createCanvas(700, 600);
 	scale(1.5);
 
 	const start = [60, 80];
 
-	let end = example3(start);
+	let end;
 
+	if (render_anim === "true"){
+		if (number == 0) {
+			end = example1(start);
+		} else if (number == 1) {
+			end = example2(start);
+		} else if (number == 2) {
+			end = example3(start);
+		} else if (number == 3) {
+			end = example3(start);
+		} else{
+			console.log("error");
+		}	
+	}
+	
 	drawOpen(start);
 	drawOpen(end);
 }
