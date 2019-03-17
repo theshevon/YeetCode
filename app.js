@@ -18,6 +18,11 @@ var questions = ["Write a function that outputs 10 when 'answer' is correct; inc
                  "Write a function that loops 10 times and prints '<' if the iterator is divisible by 2, '>' otherwise",
                  "Write a function that loops 5 times and prints the each iterator n times"];
 
+var answers = ["if answer == 10:\n\tprint(\"Correct\")\nelse:\n\tprint(\"Incorrect\")",
+                "number_of_rows = 10\n\ni = 0\nwhile i <= number_of_rows:\n\tprint(\"*\"* i)\n\ti += 1",
+                "number_of_rows = 10\n\ni = 0\nwhile i <= number_of_rows:\n\tif i % 2 == 0:\n\t\tprint(\"<\")\nelse:\n\t\tprint(\">\")\n\ti += 1",
+                ""];
+
 app.get("/", function(req, res){
     res.render("home");
 });
@@ -59,7 +64,7 @@ app.post("/exercise/:id", function(req, res){
                 question: questions[q_no],
                 renderAnim: true,
                 msg: "success!",
-                code: code
+                code: answers[q_no]
             });
     //     }
     // }));
